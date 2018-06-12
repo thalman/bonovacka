@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.halman.bonovacka.Bonovacka">
+    <item
+        android:id="@+id/actionEditFood"
+        android:orderInCategory="100"
+        android:title="Nastavit jídla"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionStartStockTaking"
+        android:orderInCategory="100"
+        android:title="Začít novou inventuru"
+        app:showAsAction="never" />
+</menu>
