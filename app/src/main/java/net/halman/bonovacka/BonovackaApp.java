@@ -21,6 +21,9 @@ public class BonovackaApp implements Serializable {
         addToMenu("smažák", 9000);
         addToMenu("špagety", 8500);
         addToMenu("znojemská", 8600);
+        addToMenu("koprovka", 8600, _groups.get(1));
+        addToMenu("steak z lososa", 8600, _groups.get(2));
+        addToMenu("candát na grilu", 8600, _groups.get(2));
     }
 
     public void addToMenu(Food f) {
