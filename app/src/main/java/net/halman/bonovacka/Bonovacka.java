@@ -153,7 +153,7 @@ public class Bonovacka extends AppCompatActivity {
         float dpWidth  = outMetrics.widthPixels / density;
 
         size = Math.round(dpWidth);
-        _columns =  size / 300 - 1;
+        _columns =  size / 180 - 1;
         if (_columns > 4) _columns = 4;
         if (_columns < 1) _columns = 1;
         return _columns;
@@ -210,7 +210,7 @@ public class Bonovacka extends AppCompatActivity {
         }
 
         LinearLayout l = (LinearLayout) findViewById(R.id.boBonContainer);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, numberOfColumns());
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, numberOfColumns()*10 - 5);
         //  p.weight = numberOfColumns();
         l.setLayoutParams(p);
     }

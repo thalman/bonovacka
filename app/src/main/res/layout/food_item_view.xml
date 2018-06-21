@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="100"
-        android:padding="@dimen/fab_margin">
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,9 +29,9 @@
                 android:id="@+id/fiPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:gravity="right"
-                android:text="110,50 Kč" />
+                android:text="110,50" />
         </LinearLayout>
 
     </FrameLayout>

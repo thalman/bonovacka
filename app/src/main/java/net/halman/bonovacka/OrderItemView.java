@@ -12,7 +12,6 @@ import android.widget.TextView;
 public class OrderItemView extends LinearLayout {
     private TextView name = null;
     private TextView price = null;
-    private TextView plus = null;
     private TextView minus = null;
     private OrderItem item = null;
     private FrameLayout frame = null;
@@ -46,10 +45,10 @@ public class OrderItemView extends LinearLayout {
         inflater.inflate(R.layout.order_item_view, this);
 
         name = (TextView) this.findViewById(R.id.orderName);
+        name.setOnClickListener(plusMinusClickListener);
         price = (TextView) this.findViewById(R.id.orderPrice);
-        plus = (TextView) this.findViewById(R.id.orderPlus);
-        plus.setOnClickListener(plusMinusClickListener);
-        minus = (TextView) this.findViewById(R.id.orderMinus);
+        price.setOnClickListener(plusMinusClickListener);
+        minus = (TextView) this.findViewById(R.id.orderCross);
         minus.setOnClickListener(plusMinusClickListener);
         frame = (FrameLayout) this.findViewById(R.id.orderFrame);
         app = (Bonovacka) context;
@@ -75,12 +74,12 @@ public class OrderItemView extends LinearLayout {
     }
 
     private void plusMinusClicked(View v) {
-        if (v.getId() == R.id.orderPlus) {
+        if (v.getId() == R.id.orderName || v.getId() == R.id.orderPrice) {
             if (item != null) item.inc();
             updateView();
             if (app != null) app.updatePrize();
         }
-        if (v.getId() == R.id.orderMinus) {
+        if (v.getId() == R.id.orderCross) {
             if (item != null) item.dec();
             updateView();
             if (app != null) app.updatePrize();

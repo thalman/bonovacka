@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10"
-        android:padding="@dimen/fab_margin">
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/orderName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -32,25 +32,14 @@
                 android:layout_weight="0" />
 
             <TextView
-                android:id="@+id/orderPlus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:gravity="center_horizontal|center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="+"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-
-            <TextView
-                android:id="@+id/orderMinus"
+                android:id="@+id/orderCross"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="-"
+                android:text="&#x2715;"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         </LinearLayout>
     </FrameLayout>
