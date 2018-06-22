@@ -111,11 +111,13 @@ public class Bonovacka extends AppCompatActivity {
         else if (id == R.id.actionFirstBon) {
             _model.first();
             recreateOrder();
+            updatePrize();
             return true;
         }
-        else if (id == R.id.actionFirstBon) {
+        else if (id == R.id.actionLastBon) {
             _model.last();
             recreateOrder();
+            updatePrize();
             return true;
         }
         return super.onOptionsItemSelected(item);
