@@ -217,7 +217,7 @@ public class Bonovacka extends AppCompatActivity {
         }
 
         LinearLayout l = (LinearLayout) findViewById(R.id.boBonContainer);
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, numberOfColumns()*10 - 5);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, numberOfColumns()*10 - 2);
         //  p.weight = numberOfColumns();
         l.setLayoutParams(p);
     }
