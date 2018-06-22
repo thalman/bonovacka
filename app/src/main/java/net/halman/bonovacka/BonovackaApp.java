@@ -142,4 +142,6 @@ public class BonovackaApp implements Serializable {
     public Bon next () { return _book.next(); }
     public Bon prev () { return _book.prev(); }
     public Bon get () { return _book.get(); }
+    public Bon first () { return _book.first(); }
+    public Bon last () { return _book.last(); }
 }

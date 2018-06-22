@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,15 +20,11 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
 public class Bonovacka extends AppCompatActivity {
@@ -111,6 +106,16 @@ public class Bonovacka extends AppCompatActivity {
         }
         else if (id == R.id.actionStartStockTaking) {
             startDialog();
+            return true;
+        }
+        else if (id == R.id.actionFirstBon) {
+            _model.first();
+            recreateOrder();
+            return true;
+        }
+        else if (id == R.id.actionFirstBon) {
+            _model.last();
+            recreateOrder();
             return true;
         }
         return super.onOptionsItemSelected(item);

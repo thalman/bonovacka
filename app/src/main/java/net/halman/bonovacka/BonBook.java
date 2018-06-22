@@ -82,6 +82,19 @@ public class BonBook implements Serializable {
         return get();
     }
 
+    Bon first() {
+        removeZeros();
+        _cursor = 0;
+        return get();
+    }
+
+    Bon last() {
+        removeZeros();
+        _cursor = _book.size() - 1;
+        if (_cursor < 0) _cursor = 0;
+        return get();
+    }
+
     void removeFromBook (Food f) {
         for (int i = 0; i < _book.size(); i++) {
             _book.get(i).deleteFood(f);

@@ -12,4 +12,14 @@
         android:orderInCategory="100"
         android:title="Začít novou inventuru"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/actionFirstBon"
+        android:orderInCategory="100"
+        android:title="Na první bon"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actionLastBon"
+        android:orderInCategory="100"
+        android:title="Na poslední bon"
+        app:showAsAction="never" />
 </menu>
