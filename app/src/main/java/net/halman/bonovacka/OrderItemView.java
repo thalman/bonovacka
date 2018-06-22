@@ -47,7 +47,6 @@ public class OrderItemView extends LinearLayout {
         name = (TextView) this.findViewById(R.id.orderName);
         name.setOnClickListener(plusMinusClickListener);
         price = (TextView) this.findViewById(R.id.orderPrice);
-        price.setOnClickListener(plusMinusClickListener);
         minus = (TextView) this.findViewById(R.id.orderCross);
         minus.setOnClickListener(plusMinusClickListener);
         frame = (FrameLayout) this.findViewById(R.id.orderFrame);
@@ -74,7 +73,7 @@ public class OrderItemView extends LinearLayout {
     }
 
     private void plusMinusClicked(View v) {
-        if (v.getId() == R.id.orderName || v.getId() == R.id.orderPrice) {
+        if (v.getId() == R.id.orderName) {
             if (item != null) item.inc();
             updateView();
             if (app != null) app.updatePrize();
