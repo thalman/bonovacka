@@ -18,7 +18,7 @@ import android.widget.TextView;
 public class FoodEdit extends AppCompatActivity {
     private BonovackaApp _model = new BonovackaApp ();
     private TabLayout groupTabs = null;
-    private int selectedGroup = 0;
+    private int selectedGroup = 1;
     private Button addFoodButton = null;
 
     @Override
@@ -37,7 +37,7 @@ public class FoodEdit extends AppCompatActivity {
                 }
         );
         groupTabs = (TabLayout) findViewById(R.id.feTabs);
-        for (int i = 0; i < _model.groups(); i++) {
+        for (int i = 1; i < _model.groups(); i++) {
             groupTabs.addTab(groupTabs.newTab().setText(_model.group(i)));
         }
 
@@ -84,7 +84,7 @@ public class FoodEdit extends AppCompatActivity {
     }
 
     private void onGroupChange (TabLayout.Tab tab){
-        selectedGroup = tab.getPosition ();
+        selectedGroup = tab.getPosition () + 1;
         createFoodList ();
     }
 

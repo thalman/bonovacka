@@ -51,7 +51,11 @@ public class FoodItemView extends LinearLayout {
     public void setFood(Food food) {
         this.food = food;
         name.setText(this.food.name());
-        price.setText("" + this.food.price()/100);
+        if (food.price() == 0) {
+            price.setText("");
+        } else {
+            price.setText("" + this.food.price() / 100);
+        }
     }
     public Food getFood() { return food; }
 

@@ -13,6 +13,7 @@ public class BonovackaApp implements Serializable {
     private BonBook _book = new BonBook ();
 
     public BonovackaApp() {
+        _groups.add("-");
         _groups.add("Hotovky");
         _groups.add("Sobotky");
         _groups.add("Minutky");
@@ -31,7 +32,7 @@ public class BonovackaApp implements Serializable {
     }
 
     public void addToMenu(String name, int price) {
-        _foods.add(new Food(name, price, _groups.get(0)));
+        _foods.add(new Food(name, price, _groups.get(1)));
     }
 
     public void addToMenu(String name, int price, String group) {
@@ -144,4 +145,10 @@ public class BonovackaApp implements Serializable {
     public Bon get () { return _book.get(); }
     public Bon first () { return _book.first(); }
     public Bon last () { return _book.last(); }
+
+    public void upgrade () {
+        if (! _groups.get(0).equals("-")) {
+            _groups.add(0, "-");
+        }
+    }
 }

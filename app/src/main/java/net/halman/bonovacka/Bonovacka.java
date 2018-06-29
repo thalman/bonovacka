@@ -218,10 +218,12 @@ public class Bonovacka extends AppCompatActivity {
     private int foodColor (Food f) {
         switch (_model.groupIndex(f.group())) {
             case 0:
-                return 0xffe0e0e0;
+                return 0xffa0bfff;
             case 1:
-                return 0xffa3cfc6;
+                return 0xffe0e0e0;
             case 2:
+                return 0xffa3cfc6;
+            case 3:
                 return 0xffe7d3b6;
             default:
                 return 0xfff0f0f0;
@@ -236,8 +238,14 @@ public class Bonovacka extends AppCompatActivity {
                 foodClicked(v);
             }
         };
+        View.OnClickListener otherClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                otherClicked(v);
+            }
+        };
 
-        int itemsPerColumn = _model.menuSize() / numberOfColumns() + (_model.menuSize() % numberOfColumns() == 0 ? 0 : 1);
+        int itemsPerColumn = (_model.menuSize() + 1) / numberOfColumns() + (_model.menuSize() % numberOfColumns() == 0 ? 0 : 1);
 
         for (int column = 0; column < numberOfColumns(); column++) {
             LinearLayout a = new LinearLayout(this);
@@ -253,6 +261,16 @@ public class Bonovacka extends AppCompatActivity {
                     item.setOnClickListener(foodClickListener);
                     item.setColor(foodColor(_model.menuItem(idx)));
                     a.addView(item);
+                } else {
+                    FoodItemView item = new FoodItemView(this);
+
+                    item.setFood(new Food("Jiné", 0, "-"));
+                    item.setId(1000 + idx);
+                    item.setLayoutParams(params);
+                    item.setOnClickListener(otherClickListener);
+                    item.setColor(foodColor(item.getFood()));
+                    a.addView(item);
+                    break;
                 }
             }
             LinearLayout foodContainer = findColumn(column);
@@ -339,6 +357,10 @@ public class Bonovacka extends AppCompatActivity {
         addFoodToOrder(i.getFood());
     }
 
+    private void otherClicked (View v) {
+        otherDialog();
+    }
+
     private void appClicked (View v) {
         if (v.getId () == R.id.clear) {
             _model.clearOrder();
@@ -377,6 +399,7 @@ public class Bonovacka extends AppCompatActivity {
             _model = (BonovackaApp) ois.readObject();
             ois.close();
             file.close();
+            _model.upgrade ();
         } catch (Exception e) {
             _model = new BonovackaApp();
         }
@@ -458,4 +481,38 @@ public class Bonovacka extends AppCompatActivity {
 
         builder.show();
     }
+
+    public void otherDialog () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Cena jiného jídla:");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("Přidat", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String startstr = input.getText().toString();
+                try {
+                    int price = Integer.parseInt(startstr);
+                    Food f = new Food ("Jiné", price * 100, "-");
+                    _model.addToOrder(f);
+                } catch (Exception e) {
+                }
+                recreateOrder();
+                updatePrize();
+            }
+        });
+        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
 }
