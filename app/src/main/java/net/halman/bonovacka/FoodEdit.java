@@ -64,7 +64,6 @@ public class FoodEdit extends AppCompatActivity {
 
     @Override
     public void finish() {
-        _model.menuSort();
         Intent intent = new Intent();
         intent.putExtra("food", _model);
         setResult(RESULT_OK, intent);
