@@ -154,8 +154,8 @@ public class Bonovacka extends AppCompatActivity {
         float dpWidth  = outMetrics.widthPixels / density;
 
         size = Math.round(dpWidth);
-        _columns =  size / 180 - 1;
-        if (_columns > 4) _columns = 4;
+        _columns =  size / 150 - 1;
+        if (_columns > 5) _columns = 5;
         if (_columns < 1) _columns = 1;
         return _columns;
     }
@@ -195,13 +195,15 @@ public class Bonovacka extends AppCompatActivity {
                 return (LinearLayout) findViewById(R.id.boFoodContainer3);
             case 3:
                 return (LinearLayout) findViewById(R.id.boFoodContainer4);
+            case 4:
+                return (LinearLayout) findViewById(R.id.boFoodContainer5);
             default:
                 return null;
         }
     }
 
     private void setupWidth () {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             LinearLayout l = findColumn(i);
             if (i < numberOfColumns()) {
                 l.setVisibility(View.VISIBLE);
@@ -245,8 +247,9 @@ public class Bonovacka extends AppCompatActivity {
             }
         };
 
-        int itemsPerColumn = (_model.menuSize() + 1) / numberOfColumns() + (_model.menuSize() % numberOfColumns() == 0 ? 0 : 1);
+        int itemsPerColumn = (_model.menuSize() + 1) / numberOfColumns() + ((_model.menuSize() + 1) % numberOfColumns() == 0 ? 0 : 1);
 
+        boolean otherAdded = false;
         for (int column = 0; column < numberOfColumns(); column++) {
             LinearLayout a = new LinearLayout(this);
             a.setOrientation(LinearLayout.VERTICAL);
@@ -262,15 +265,17 @@ public class Bonovacka extends AppCompatActivity {
                     item.setColor(foodColor(_model.menuItem(idx)));
                     a.addView(item);
                 } else {
-                    FoodItemView item = new FoodItemView(this);
+                    if (!otherAdded) {
+                        FoodItemView item = new FoodItemView(this);
 
-                    item.setFood(new Food("Jiné", 0, "-"));
-                    item.setId(1000 + idx);
-                    item.setLayoutParams(params);
-                    item.setOnClickListener(otherClickListener);
-                    item.setColor(foodColor(item.getFood()));
-                    a.addView(item);
-                    break;
+                        item.setFood(new Food("Jiné", 0, "-"));
+                        item.setId(1000 + idx);
+                        item.setLayoutParams(params);
+                        item.setOnClickListener(otherClickListener);
+                        item.setColor(foodColor(item.getFood()));
+                        a.addView(item);
+                        otherAdded = true;
+                    }
                 }
             }
             LinearLayout foodContainer = findColumn(column);
