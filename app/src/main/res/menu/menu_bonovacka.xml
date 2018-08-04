@@ -8,6 +8,11 @@
         android:title="Nastavit jídla"
         app:showAsAction="never" />
     <item
+        android:id="@+id/actionDownloadCSV"
+        android:orderInCategory="100"
+        android:title="Stáhnout jídla z Internetu"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/actionStartStockTaking"
         android:orderInCategory="100"
         android:title="Začít novou inventuru"

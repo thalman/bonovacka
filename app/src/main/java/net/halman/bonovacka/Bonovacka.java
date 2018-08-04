@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -32,6 +33,32 @@ public class Bonovacka extends AppCompatActivity {
     final String stateFile = "bonovacka.bin";
     private BonovackaApp _model = new BonovackaApp();
     private int _columns = 0;
+
+    class MenuDownloadTask extends AsyncTask<String, Void, String>
+    {
+        protected void onPreExecute() {
+        //display progress dialog.
+        }
+        protected String doInBackground(String... params) {
+            try {
+                _model.getCsv(params[0]);
+            } catch (Exception e) {
+                return e.toString(); //getMessage();
+            }
+            return "";
+        }
+        protected void onPostExecute(String result) {
+            // report failure or update list of food
+            if (result.isEmpty()) {
+                recreateFoodList();
+                recreateOrder();
+                updatePrize();
+                showMessage("Info","Jídelníček byl aktualizován");
+            } else {
+                showMessage("Chyba", "Jídelníček se nepodařilo atualizovat!\n" + result);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +143,12 @@ public class Bonovacka extends AppCompatActivity {
         }
         else if (id == R.id.actionLastBon) {
             _model.last();
+            recreateOrder();
+            updatePrize();
+            return true;
+        }
+        else if (id == R.id.actionDownloadCSV) {
+            downloadDialog();
             recreateOrder();
             updatePrize();
             return true;
@@ -227,6 +260,12 @@ public class Bonovacka extends AppCompatActivity {
                 return 0xffa3cfc6;
             case 3:
                 return 0xffe7d3b6;
+            case 4:
+                return 0xffffb6d1;
+            case 5:
+                return 0xffb3f397;
+            case 6:
+                return 0xffecfb6f;
             default:
                 return 0xfff0f0f0;
         }
@@ -411,9 +450,9 @@ public class Bonovacka extends AppCompatActivity {
 
     }
 
-    public void showMessage(String text) {
+    public void showMessage(String title, String text) {
         AlertDialog alertDialog = new AlertDialog.Builder(Bonovacka.this).create();
-        alertDialog.setTitle("Alert");
+        alertDialog.setTitle(title);
         alertDialog.setMessage(text);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
@@ -508,6 +547,33 @@ public class Bonovacka extends AppCompatActivity {
                 }
                 recreateOrder();
                 updatePrize();
+            }
+        });
+        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    public void downloadDialog () {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Stáhnout seznam jídel");
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setText(_model.csvurl());
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("Stáhnout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String url = input.getText().toString();
+                new MenuDownloadTask().execute(url);
             }
         });
         builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {

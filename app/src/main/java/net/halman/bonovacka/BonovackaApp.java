@@ -1,6 +1,12 @@
 package net.halman.bonovacka;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +17,7 @@ public class BonovackaApp implements Serializable {
     private ArrayList<Food> _foods = new ArrayList<Food>();
     private ArrayList<String> _groups = new ArrayList <String> ();
     private BonBook _book = new BonBook ();
+    private String _csvurl = new String();
 
     public BonovackaApp() {
         _groups.add("-");
@@ -103,7 +110,11 @@ public class BonovackaApp implements Serializable {
     }
 
     public int groupIndex (String group) {
-        for (int i = 0; i < _groups.size(); i++) {
+        return groupIndex(group, _groups);
+    }
+
+    private int groupIndex (String group, ArrayList<String> groups) {
+        for (int i = 0; i < groups.size(); i++) {
             if (group.equals(group(i))) return i;
         }
         return 0;
@@ -147,5 +158,62 @@ public class BonovackaApp implements Serializable {
         if (! _groups.get(0).equals("-")) {
             _groups.add(0, "-");
         }
+    }
+
+    public String csvurl() {
+        if (_csvurl.isEmpty()) return "https://halman.net/nextcloud/index.php/s/??????/download?path=%2F&files=menu.csv";
+        return _csvurl;
+    }
+
+    public void cvsurl (String url) {
+        _csvurl = url;
+    }
+
+    public void getCsv () throws Exception {
+        getCsv(_csvurl);
+    }
+
+    public void getCsv (String link) throws Exception {
+        URL url;
+        url = new URL(link);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        InputStream is = urlConnection.getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        String line;
+        String group = "", food = "";
+        int price;
+
+        ArrayList<Food> newfoods = new ArrayList<Food>();
+        ArrayList<String> newgroups = new ArrayList <String> ();
+        newgroups.add("-");
+        while ((line = reader.readLine()) != null) {
+            String[] RowData = line.split(",");
+            if (RowData.length >= 3) {
+                if (RowData[0].length() > 0 && !group.equals(RowData[0])) {
+                    group = RowData[0];
+                }
+                food = RowData[1];
+                try {
+                    price = Integer.parseInt(RowData[2]) * 100;
+                } catch (Exception e) {
+                    price = 0;
+                }
+                if (group.length() > 0 && food.length() > 0 && price > 0) {
+                    // we have some date
+                    // group
+                    if (groupIndex(group, newgroups) == 0) {
+                        newgroups.add(group);
+                    }
+                    // food
+                    newfoods.add(new Food(food, price, group));
+                }
+            }
+        }
+        urlConnection.disconnect();
+        _groups = newgroups;
+        _foods = newfoods;
+        _book = new BonBook();
+        _csvurl = link;
+        menuSort();
     }
 }
