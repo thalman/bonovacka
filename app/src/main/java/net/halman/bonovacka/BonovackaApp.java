@@ -73,9 +73,6 @@ public class BonovackaApp implements Serializable {
     }
 
     public void menuSort() {
-        Locale L = new Locale("cs", "CZ");
-        final Collator C = Collator.getInstance(L);
-
         Collections.sort(_foods, new Comparator<Food>() {
             @Override
             public int compare(Food lhs, Food rhs) {
@@ -84,7 +81,7 @@ public class BonovackaApp implements Serializable {
             int g2 = groupIndex(rhs.group());
             if (g1 < g2) return -1;
             if (g1 > g2) return +1;
-            return C.compare(lhs.name(),rhs.name());
+            return 0;
             }
         });
     }
