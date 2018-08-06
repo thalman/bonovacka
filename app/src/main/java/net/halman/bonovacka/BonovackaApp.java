@@ -115,7 +115,7 @@ public class BonovackaApp implements Serializable {
 
     private int groupIndex (String group, ArrayList<String> groups) {
         for (int i = 0; i < groups.size(); i++) {
-            if (group.equals(group(i))) return i;
+            if (group.equals(groups.get(i))) return i;
         }
         return 0;
     }
@@ -187,27 +187,29 @@ public class BonovackaApp implements Serializable {
         ArrayList<String> newgroups = new ArrayList <String> ();
         newgroups.add("-");
         while ((line = reader.readLine()) != null) {
-            String[] RowData = line.split(",");
-            if (RowData.length >= 3) {
-                if (RowData[0].length() > 0 && !group.equals(RowData[0])) {
-                    group = RowData[0];
-                }
-                food = RowData[1];
-                try {
-                    price = Integer.parseInt(RowData[2]) * 100;
-                } catch (Exception e) {
-                    price = 0;
-                }
-                if (group.length() > 0 && food.length() > 0 && price > 0) {
-                    // we have some date
-                    // group
-                    if (groupIndex(group, newgroups) == 0) {
-                        newgroups.add(group);
+            try {
+                ArrayList<String> RowData = CSVParser.parse(line, ',');
+                if (RowData.size() >= 3) {
+                    if (RowData.get(0).length() > 0 && !group.equals(RowData.get(0))) {
+                        group = RowData.get(0);
                     }
-                    // food
-                    newfoods.add(new Food(food, price, group));
+                    food = RowData.get(1);
+                    try {
+                        price = Integer.parseInt(RowData.get(2)) * 100;
+                    } catch (Exception e) {
+                        price = 0;
+                    }
+                    if (group.length() > 0 && food.length() > 0 && price > 0) {
+                        // we have some date
+                        // group
+                        if (groupIndex(group, newgroups) == 0) {
+                            newgroups.add(group);
+                        }
+                        // food
+                        newfoods.add(new Food(food, price, group));
+                    }
                 }
-            }
+            } catch (Exception e) { }
         }
         urlConnection.disconnect();
         _groups = newgroups;
