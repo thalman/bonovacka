@@ -22,7 +22,7 @@ public class BonovackaApp implements Serializable {
     public BonovackaApp(Context context) {
         _groups.add("-");
         _groups.add(context.getResources().getString(R.string.meal_group1));
-        _groups.add(context.getResources().getString(R.string.meal_group3));
+        _groups.add(context.getResources().getString(R.string.meal_group2));
         _groups.add(context.getResources().getString(R.string.meal_group3));
 
         String [] foods = context.getResources().getStringArray(R.array.startFoods);

@@ -5,26 +5,26 @@
     <item
         android:id="@+id/actionEditFood"
         android:orderInCategory="100"
-        android:title="Nastavit jídla"
+        android:title="@string/menu_setup"
         app:showAsAction="never" />
     <item
         android:id="@+id/actionDownloadCSV"
         android:orderInCategory="100"
-        android:title="Stáhnout jídla z Internetu"
+        android:title="@string/menu_download"
         app:showAsAction="never" />
     <item
         android:id="@+id/actionStartStockTaking"
         android:orderInCategory="100"
-        android:title="Začít novou inventuru"
+        android:title="@string/menu_start_new_inventory"
         app:showAsAction="never" />
     <item
         android:id="@+id/actionFirstBon"
         android:orderInCategory="100"
-        android:title="Na první bon"
+        android:title="@string/menu_first_item"
         app:showAsAction="never" />
     <item
         android:id="@+id/actionLastBon"
         android:orderInCategory="100"
-        android:title="Na poslední bon"
+        android:title="@string/menu_last_item"
         app:showAsAction="never" />
 </menu>

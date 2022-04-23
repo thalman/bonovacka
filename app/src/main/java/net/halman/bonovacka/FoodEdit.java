@@ -95,14 +95,14 @@ public class FoodEdit extends AppCompatActivity {
     private void onDialogOK (Food f, String name, int price) {
         if (f == null) {
             if (_model.menuItem(name) != null) {
-                showMessage("Chyba", "Jídlo s tímto jménem už existuje");
+                showMessage(getString(R.string.error), getString(R.string.food_exists));
             } else {
                 _model.addToMenu(name, price, _model.group(selectedGroup));
             }
         } else {
             if (! f.name().equals(name)) {
                 if (_model.menuItem(name) != null) {
-                    showMessage("Chyba", "Jídlo s tímto jménem už existuje");
+                    showMessage(getString(R.string.error), getString(R.string.food_exists));
                 } else {
                     f.name(name);
                     f.price(price);
@@ -166,12 +166,12 @@ public class FoodEdit extends AppCompatActivity {
         final EditText foodName = dialogContent.findViewById(R.id.dialogFoodName);
         final EditText foodPrice = dialogContent.findViewById(R.id.dialogFoodPrice);
 
-        builder.setTitle("Opravit název a cenu");
+        builder.setTitle(getString(R.string.food_change));
         foodName.setText(f.name());
         foodPrice.setText("" + f.price()/100);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int price = 0;
@@ -181,13 +181,13 @@ public class FoodEdit extends AppCompatActivity {
                 onDialogOK (f, foodName.getText().toString(), price);
             }
         });
-        builder.setNegativeButton("Neukádat", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.food_do_not_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-        builder.setNeutralButton("Smazat", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(getString(R.string.food_delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 onDialogDelete(f);
@@ -210,10 +210,10 @@ public class FoodEdit extends AppCompatActivity {
         final EditText foodName = dialogContent.findViewById(R.id.dialogFoodName);
         final EditText foodPrice = dialogContent.findViewById(R.id.dialogFoodPrice);
 
-        builder.setTitle("Nové jídlo a jeho cena");
+        builder.setTitle(getString(R.string.food_new));
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 int price = 0;
@@ -223,7 +223,7 @@ public class FoodEdit extends AppCompatActivity {
                 onDialogOK (null, foodName.getText().toString(), price);
             }
         });
-        builder.setNegativeButton("Neukádat", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.food_do_not_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -236,7 +236,7 @@ public class FoodEdit extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(text);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();

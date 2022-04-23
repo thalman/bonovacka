@@ -16,6 +16,12 @@
     <string name="meal_group2">Sunday offer</string>
     <string name="meal_group3">Steaks</string>
 
+    <string name="menu_setup">Set up menu</string>
+    <string name="menu_download">Download menu from Internet</string>
+    <string name="menu_start_new_inventory">Start a new stock taking</string>
+    <string name="menu_first_item">Go to first item</string>
+    <string name="menu_last_item">Go to last item</string>
+
     <string-array name="startFoods">
         <item>Steak</item>
         <item>Fried cheese</item>
@@ -25,4 +31,24 @@
     </string-array>
 
     <string name="other_meal">Other</string>
+    <string name="menu_update_ok">Menu has been updates</string>
+    <string name="menu_update_fail">Failed tu update menu!</string>
+    <string name="add_new_item">Add new item</string>
+    <string name="starting_item">Start from item number:</string>
+    <string name="other_food_price">Price of this food:</string>
+    <string name="download_menu_list">Download menu</string>
+    <string name="download">Download</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="info">Info</string>
+    <string name="add">Add</string>
+
+    <string name="food_exists">Food with this name exists already</string>
+    <string name="food_change">Change food name or price</string>
+    <string name="food_do_not_save">Cancel</string>
+    <string name="food_delete">Delete</string>
+    <string name="food_new">Add food and price</string>
+
 </resources>

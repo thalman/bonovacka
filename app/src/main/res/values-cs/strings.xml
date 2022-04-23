@@ -10,6 +10,12 @@
     <string name="meal_group2">Sobotky</string>
     <string name="meal_group3">Minutky</string>
 
+    <string name="menu_setup">Nastavit jídla</string>
+    <string name="menu_download">Stáhnout jídla z internetu</string>
+    <string name="menu_start_new_inventory">Začít novou inventuru</string>
+    <string name="menu_first_item">Na první bon</string>
+    <string name="menu_last_item">Na poslední bon</string>
+
     <string-array name="startFoods">
         <item>Řízek</item>
         <item>Smažák</item>
@@ -19,4 +25,24 @@
     </string-array>
 
     <string name="other_meal">Jiné</string>
+    <string name="menu_update_ok">Jídelníček byl aktualizován</string>
+    <string name="menu_update_fail">Jídelníček se nepodařilo atualizovat!</string>
+    <string name="add_new_item">Přidat novou položku</string>
+    <string name="starting_item">Začít znovu od bonu č.</string>
+    <string name="other_food_price">Cena jiného jídla:</string>
+    <string name="download_menu_list">Stáhnout seznam jídel</string>
+    <string name="download">Stáhnout</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Zrušit</string>
+    <string name="error">Chyba</string>
+    <string name="info">Informace</string>
+    <string name="add">Přidat</string>
+
+    <string name="food_exists">Jídlo s tímto názvem již existuje</string>
+    <string name="food_change">Opravit cenu a název jídla</string>
+    <string name="food_do_not_save">Neukládat</string>
+    <string name="food_delete">Smazat</string>
+    <string name="food_new">Nové jídlo a jeho cena</string>
+
 </resources>

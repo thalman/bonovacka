@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -53,9 +54,9 @@ public class Bonovacka extends AppCompatActivity {
                 recreateFoodList();
                 recreateOrder();
                 updatePrize();
-                showMessage("Info","Jídelníček byl aktualizován");
+                showMessage(getString(R.string.info), getString(R.string.menu_update_ok));
             } else {
-                showMessage("Chyba", "Jídelníček se nepodařilo atualizovat!\n" + result);
+                showMessage(getString(R.string.error), getString(R.string.menu_update_fail) + "\n" + result);
             }
         }
     }
@@ -314,60 +315,6 @@ public class Bonovacka extends AppCompatActivity {
         }
 
         setupWidth ();
-
-        /*
-        // working with just one column
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        LinearLayout foodContainer = (LinearLayout) findViewById(R.id.boFoodContainer);
-        foodContainer.removeAllViews();
-        View.OnClickListener foodClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                foodClicked(v);
-            }
-        };
-
-        LinearLayout a = new LinearLayout(this);
-        a.setOrientation(LinearLayout.VERTICAL);
-        for (int i=0; i < _model.menuSize(); i++) {
-            FoodItemView item = new FoodItemView(this);
-
-            item.setFood(_model.menuItem(i));
-            item.setId(1000 + i);
-            item.setLayoutParams(params);
-            item.setOnClickListener(foodClickListener);
-            a.addView(item);
-        }
-        foodContainer.addView(a);
-        */
-
-        /*
-        TableLayout a = new TableLayout(this);
-        a.setLayoutParams(
-                new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                        TableLayout.LayoutParams.WRAP_CONTENT)
-        );
-        int itemsPerColumn = _model.menuSize() / numberOfColumns() + 1;
-        for (int line = 0; line < itemsPerColumn; line++) {
-            TableRow row = new TableRow(this);
-            row.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT));
-            for (int col = 0; col < numberOfColumns(); col++) {
-                int index = line + col*itemsPerColumn;
-                if (index < _model.menuSize()) {
-                    FoodItemView item = new FoodItemView(this);
-                    item.setFood(_model.menuItem(index));
-                    item.setId(1000 + index);
-                    item.setLayoutParams(params);
-                    item.setOnClickListener(foodClickListener);
-                    row.addView(item);
-                }
-            }
-            a.addView(row);
-        }
-        b.addView(a);
-        foodContainer.addView(b);
-        */
     }
 
     public BonovackaApp getModel() {
@@ -383,7 +330,7 @@ public class Bonovacka extends AppCompatActivity {
     public void updatePrize () {
         TextView price = findViewById(R.id.priceTotal);
         if (price != null) {
-            price.setText(_model.get().price()/100 + "/" + _model.price()/100 + "Kč");
+            price.setText(_model.get().price()/100 + "/" + _model.price()/100);
         }
     }
 
@@ -445,7 +392,7 @@ public class Bonovacka extends AppCompatActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(Bonovacka.this).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(text);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -456,7 +403,7 @@ public class Bonovacka extends AppCompatActivity {
 
     public void foodDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Přidat novou položku");
+        builder.setTitle(getString(R.string.add_new_item));
 
         // Set up the input
         LayoutInflater inflater = getLayoutInflater();
@@ -466,13 +413,13 @@ public class Bonovacka extends AppCompatActivity {
         builder.setView(inflater.inflate(R.layout.food_dialog, null));
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //m_Text = input.getText().toString();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -484,14 +431,14 @@ public class Bonovacka extends AppCompatActivity {
 
     public void startDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Začít znovu od bonu č.");
+        builder.setTitle(getString(R.string.starting_item));
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String startstr = input.getText().toString();
@@ -507,7 +454,7 @@ public class Bonovacka extends AppCompatActivity {
                 updatePrize();
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -519,14 +466,14 @@ public class Bonovacka extends AppCompatActivity {
 
     public void otherDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Cena jiného jídla:");
+        builder.setTitle(getString(R.string.other_food_price));
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("Přidat", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String startstr = input.getText().toString();
@@ -540,7 +487,7 @@ public class Bonovacka extends AppCompatActivity {
                 updatePrize();
             }
         });
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -552,7 +499,7 @@ public class Bonovacka extends AppCompatActivity {
 
     public void downloadDialog () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Stáhnout seznam jídel");
+        builder.setTitle(getString(R.string.download_menu_list));
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -560,14 +507,14 @@ public class Bonovacka extends AppCompatActivity {
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("Stáhnout", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.download), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String url = input.getText().toString();
                 new MenuDownloadTask().execute(url);
             }
         });
-        builder.setNegativeButton("Zrušit", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
