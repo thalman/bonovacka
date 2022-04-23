@@ -161,7 +161,7 @@ public class BonovackaApp implements Serializable {
     }
 
     public String csvurl() {
-        if (_csvurl.isEmpty()) return "https://halman.net/nextcloud/index.php/s/??????/download?path=%2F&files=menu.csv";
+        if (_csvurl.isEmpty()) return "https://example.com/menu.csv";
         return _csvurl;
     }
 
