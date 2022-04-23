@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_food">Přidat jídlo</string>
+    <string name="delete_item">Smazat bon</string>
+
+    <string name="food_name">Jídlo</string>
+    <string name="food_price">Cena</string>
+</resources>

@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:text="&#x2715;"
+                android:text="@string/X"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button" />
         </LinearLayout>
     </FrameLayout>

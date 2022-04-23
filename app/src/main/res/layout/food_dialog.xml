@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Jídlo"
+        android:hint="@string/food_name"
         android:inputType="text" />
 
     <EditText
@@ -17,6 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Cena"
+        android:hint="@string/food_price"
         android:inputType="number" />
 </LinearLayout>
