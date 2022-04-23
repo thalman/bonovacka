@@ -11,4 +11,18 @@
 
     <string name="food_name">Food</string>
     <string name="food_price">Price</string>
+
+    <string name="meal_group1">Daily offer</string>
+    <string name="meal_group2">Sunday offer</string>
+    <string name="meal_group3">Steaks</string>
+
+    <string-array name="startFoods">
+        <item>Steak</item>
+        <item>Fried cheese</item>
+        <item>Spagetti</item>
+        <item>Pizza</item>
+        <item>Salmon</item>
+    </string-array>
+
+    <string name="other_meal">Other</string>
 </resources>

@@ -31,7 +31,7 @@ import java.io.ObjectOutputStream;
 public class Bonovacka extends AppCompatActivity {
 
     final String stateFile = "bonovacka.bin";
-    private BonovackaApp _model = new BonovackaApp();
+    private BonovackaApp _model = null;
     private int _columns = 0;
 
     class MenuDownloadTask extends AsyncTask<String, Void, String>
@@ -298,7 +298,7 @@ public class Bonovacka extends AppCompatActivity {
                     if (!otherAdded) {
                         FoodItemView item = new FoodItemView(this);
 
-                        item.setFood(new Food("Jiné", 0, "-"));
+                        item.setFood(new Food(getString(R.string.other_meal), 0, "-"));
                         item.setId(1000 + idx);
                         item.setLayoutParams(params);
                         item.setOnClickListener(otherClickListener);
@@ -436,7 +436,7 @@ public class Bonovacka extends AppCompatActivity {
             file.close();
             _model.upgrade ();
         } catch (Exception e) {
-            _model = new BonovackaApp();
+            _model = new BonovackaApp(this);
         }
 
     }
@@ -532,7 +532,7 @@ public class Bonovacka extends AppCompatActivity {
                 String startstr = input.getText().toString();
                 try {
                     int price = Integer.parseInt(startstr);
-                    Food f = new Food ("Jiné", price * 100, "-");
+                    Food f = new Food (getString(R.string.other_meal), price * 100, "-");
                     _model.addToOrder(f);
                 } catch (Exception e) {
                 }

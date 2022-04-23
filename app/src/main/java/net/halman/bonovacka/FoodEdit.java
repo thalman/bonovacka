@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 
 public class FoodEdit extends AppCompatActivity {
-    private BonovackaApp _model = new BonovackaApp ();
+    private BonovackaApp _model = null;
     private TabLayout groupTabs = null;
     private int selectedGroup = 1;
     private Button addFoodButton = null;

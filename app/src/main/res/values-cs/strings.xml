@@ -5,4 +5,18 @@
 
     <string name="food_name">Jídlo</string>
     <string name="food_price">Cena</string>
+
+    <string name="meal_group1">Hotovky</string>
+    <string name="meal_group2">Sobotky</string>
+    <string name="meal_group3">Minutky</string>
+
+    <string-array name="startFoods">
+        <item>Řízek</item>
+        <item>Smažák</item>
+        <item>Špagety</item>
+        <item>Pizza</item>
+        <item>Losos</item>
+    </string-array>
+
+    <string name="other_meal">Jiné</string>
 </resources>

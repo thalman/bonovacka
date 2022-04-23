@@ -1,37 +1,34 @@
 package net.halman.bonovacka;
 
-import java.io.BufferedInputStream;
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Locale;
 
 public class BonovackaApp implements Serializable {
     private ArrayList<Food> _foods = new ArrayList<Food>();
     private ArrayList<String> _groups = new ArrayList <String> ();
     private BonBook _book = new BonBook ();
     private String _csvurl = new String();
+    private Context _context;
 
-    public BonovackaApp() {
+    public BonovackaApp(Context context) {
         _groups.add("-");
-        _groups.add("Hotovky");
-        _groups.add("Sobotky");
-        _groups.add("Minutky");
+        _groups.add(context.getResources().getString(R.string.meal_group1));
+        _groups.add(context.getResources().getString(R.string.meal_group3));
+        _groups.add(context.getResources().getString(R.string.meal_group3));
 
-        addToMenu("řízek", 9900);
-        addToMenu("smažák", 9000);
-        addToMenu("špagety", 8500);
-        addToMenu("znojemská", 8600);
-        addToMenu("koprovka", 8600, _groups.get(1));
-        addToMenu("steak z lososa", 8600, _groups.get(2));
-        addToMenu("candát na grilu", 8600, _groups.get(2));
+        String [] foods = context.getResources().getStringArray(R.array.startFoods);
+        for (String food: foods) {
+            addToMenu(food, 9900);
+        }
     }
 
     public void addToMenu(Food f) {
